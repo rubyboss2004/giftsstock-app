@@ -1,0 +1,55 @@
+{
+  "entities": {
+    "InventoryItem": {
+      "title": "Inventory Item",
+      "description": "Represents an item in the inventory.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the item" },
+        "quantity": { "type": "number", "description": "Current quantity in stock" },
+        "lastUpdated": { "type": "string", "format": "date-time", "description": "Last update timestamp" }
+      },
+      "required": ["name", "quantity"]
+    },
+    "ExchangeRecord": {
+      "title": "Exchange Record",
+      "description": "Records of items exchanged or redeemed.",
+      "type": "object",
+      "properties": {
+        "handler": { "type": "string", "description": "Person handling the exchange" },
+        "date": { "type": "string", "description": "Date of the exchange" },
+        "exchangeItem": { "type": "string", "description": "Item being exchanged out (optional for pending points requests)" },
+        "quantity": { "type": "number", "description": "Quantity involved" },
+        "imageUrl": { "type": "string", "description": "Base64 image URL for points exchange requests" },
+        "status": { "type": "string", "enum": ["pending", "confirmed"], "description": "Status of the record" },
+        "system": { "type": "string", "enum": ["birthday", "points"], "description": "Which system this record belongs to" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "System timestamp" }
+      },
+      "required": ["handler", "date", "quantity", "status", "system"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "System-wide settings.",
+      "type": "object",
+      "properties": {
+        "googleSheetsId": { "type": "string", "description": "Google Spreadsheet ID" },
+        "birthdaySheetName": { "type": "string", "description": "Sheet name for birthday system" },
+        "pointsSheetName": { "type": "string", "description": "Sheet name for points system" }
+      }
+    }
+  },
+  "firestore": {
+    "/inventory": {
+      "schema": "InventoryItem",
+      "description": "Collection of inventory items."
+    },
+    "/exchange_records": {
+      "schema": "ExchangeRecord",
+      "description": "Collection of exchange history."
+    },
+    "/settings": {
+      "schema": "Settings",
+      "description": "Collection of system settings."
+    }
+  }
+}

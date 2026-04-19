@@ -1,0 +1,5 @@
+{
+  "name": "庫存管理系統 (Inventory Management System)",
+  "description": "一個整合 Google Sheets 的庫存與兌換紀錄管理系統，支援電腦與手機使用。提供總庫存查看、兌換紀錄填寫與手動庫存輸入功能。",
+  "requestFramePermissions": []
+}
